@@ -5,42 +5,35 @@ import SwapiService from '../../services/swapi-service';
 import './random-planet.css';
 
 export default class RandomPlanet extends Component {
-
+// запускаем код API
   swapiService = new SwapiService();
-
+// что нужно этому компоненту
   state = {
-    id: null,
-    name: null,
-    population: null,
-    rotationPeriod: null,
-    diameter: null
+    planet: {} // сделаем пустым объектом, чтобы код деструктуризации не ругался
   };
-
+  // вызвать код updatePlanet в конструкторе
   constructor() {
     super();
     this.updatePlanet();
   }
+// создадим ф-ю
+  onPlanetLoaded = (planet) => {
+    this.setState({planet});
+  };
 
-  updatePlanet() {
-    // id случайной планеты
-    const id = Math.floor(Math.random()*25) + 2;
+  updatePlanet() { // получаем данные из сервера
+    // чтобы выбрать id случайной планеты
+    const id = Math.floor(Math.random()*25) + 2; // id от 2 до 27 можем получать случайным образом
+    // запрашиваем данные планеты
     this.swapiService
       .getPlanet(id)
-      .then((planet) => {
-        this.setState({
-          id,
-          name: planet.name,
-          population: planet.population,
-          rotationPeriod: planet.rotation_period,
-          diameter: planet.diameter
-        });
-      });
+      .then(this.onPlanetLoaded);
   }
 
   render() {
-
-    const { id, name, population,
-      rotationPeriod, diameter } = this.state;
+    // чтобы использовать эти значения в разетке
+    const { planet: { id, name, population,
+      rotationPeriod, diameter } } = this.state;
 
     return (
       <div className="random-planet jumbotron rounded">
