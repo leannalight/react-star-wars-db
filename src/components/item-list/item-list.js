@@ -12,7 +12,7 @@ export default class ItemList extends Component {
   state = {
     peopleList: null
   };
-// есл в нашем компоненте нужно вызвать API,
+// если в нашем компоненте нужно вызвать API,
 // используйте componentDidMount()
   componentDidMount() {
     this.swapiService
