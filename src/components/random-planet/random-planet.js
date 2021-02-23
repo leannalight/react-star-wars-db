@@ -14,10 +14,16 @@ export default class RandomPlanet extends Component {
     planet: {}, // сделаем пустым объектом, чтобы код деструктуризации не ругался
     loading: true
   };
-  // вызвать код updatePlanet в конструкторе
-  constructor() {
-    super();
+  // вызвать код updatePlanet в componentDidMount()
+  componentDidMount() {
     this.updatePlanet();
+    // сохранить id интервала
+    this.interval = setInterval(this.updatePlanet, 10000);
+    // clearInterval(this.interval);
+  }
+
+  componentWillUnmount() {
+    console.log('componentWillUnmount()');
   }
 // создадим ф-ю
   onPlanetLoaded = (planet) => {
@@ -35,10 +41,10 @@ export default class RandomPlanet extends Component {
     });
   };
 
-  updatePlanet() { // получаем данные из сервера
+  updatePlanet = () => { // получаем данные из сервера
+    console.log('update');
     // чтобы выбрать id случайной планеты
-   // const id = Math.floor(Math.random()*25) + 2; // id от 2 до 27 можем получать случайным образом
-    const id = 15;
+    const id = Math.floor(Math.random()*25) + 3; // id от 3 до 27 можем получать случайным образом
    // запрашиваем данные планеты
     this.swapiService
       .getPlanet(id)
@@ -47,6 +53,7 @@ export default class RandomPlanet extends Component {
   }
 
   render() {
+    console.log('render()');
     // чтобы использовать эти значения в разметке
     const { planet, loading, error } = this.state; // деструктуризация state
     // у нас есть данные, когда нет ни загрузки, ни ошибки

@@ -6,6 +6,27 @@
 - Request
 - Reqwest
 
+Методы жизненного цикла React компонента
+
+MOUNTING
+--------
+constructor() => render() => componentDidMount()
+
+UPDATES
+-------
+New Props - пришли новые свойства
+                => render() => componentDidUpdate()
+setState() - или компонент вызвал setState() благодаря какому-то событию
+
+UNMOUNTING
+-----------
+componentWillUnmount()
+
+ERROR
+------
+componentDidCatch()
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
