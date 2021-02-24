@@ -15,8 +15,7 @@ export default class ItemList extends Component {
 // если в нашем компоненте нужно вызвать API,
 // используйте componentDidMount()
   componentDidMount() {
-    this.swapiService
-      .getAllPeople()
+    this.swapiService.getAllPeople()
       .then((peopleList) => {
         this.setState({
           peopleList
@@ -35,20 +34,21 @@ export default class ItemList extends Component {
       );
     });
   }
-    render() {
 
-      const { peopleList } = this.state;
+  render() {
 
-      if (!peopleList) {
-        return <Spinner />
-      }
+    const { peopleList } = this.state;
 
-      const items = this.renderItems(peopleList);
-
-      return (
-        <ul className="item-list list-group">
-          {items}
-        </ul>
-      );
+    if (!peopleList) {
+      return <Spinner />
     }
+
+    const items = this.renderItems(peopleList);
+
+    return (
+      <ul className="item-list list-group">
+        {items}
+      </ul>
+    );
+  }
 }
