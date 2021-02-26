@@ -1,5 +1,7 @@
 # react-star-wars-db
 
+[приложение--->](https://leannalight.github.io/react-star-wars-d/)
+
 - Axios
 - Superagent
 - Got
