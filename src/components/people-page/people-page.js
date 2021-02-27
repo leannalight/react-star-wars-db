@@ -38,9 +38,11 @@ export default class PeoplePage extends Component {
         <div className="col-md-6">
           <ItemList
             onItemSelected={this.onPersonSelected}
-            getData={this.swapiService.getAllPeople} />   {/* здесь ф-я getAllPeople не вызывается,
-                                                            а передается - тогда компонент может сам решать
-                                                            когда ее вызвать*/}
+            getData={this.swapiService.getAllPeople}
+            renderItem={({name, gender, birthYear}) =>
+              (`${name} (${gender}, ${birthYear})`)}  />   {/* здесь ф-я getAllPeople не вызывается,
+                                                      а передается - тогда компонент может сам решать
+                                                      когда ее вызвать*/}
         </div>
         <div className="col-md-6">
           <PersonDetails personId={this.state.selectedPerson} />
