@@ -1,6 +1,6 @@
 # react-star-wars-db
 
-[приложение--->](https://leannalight.github.io/react-star-wars-d/)
+[приложение--->](https://leannalight.github.io/react-star-wars-db/)
 
 - Axios
 - Superagent
