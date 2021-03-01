@@ -26,8 +26,7 @@ export default class ItemList extends Component {
   renderItems(arr) { // отвечает за то, чтобы отрендеривать элементы списка
     return arr.map((item) => {
       const { id } = item;
-
-      const label = this.props.renderItem(item);
+      const label = this.props.children(item); // один из способов как передавать элементам свойтва
 
       return (
         <li className="list-group-item"
