@@ -13,9 +13,6 @@ const withData = (View, getData) => {
   // если в нашем компоненте нужно вызвать API,
   // используйте componentDidMount()
     componentDidMount() {
-
-      const { getData } = this.props;
-
       getData()
         .then((data) => {
           this.setState({
