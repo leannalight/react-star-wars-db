@@ -9,9 +9,20 @@ const withData = (View) => {
     state = {
       data: null
     };
-  // если в нашем компоненте нужно вызвать API,
-  // используйте componentDidMount()
+    // когда мы получили обновление компонента
+    componentDidUpdate(prevProps) {
+      if (this.props.getData !== prevProps.getData) {
+        this.update();
+      }
+    }
+
+    // если в нашем компоненте нужно вызвать API,
+    // используйте componentDidMount()
     componentDidMount() {
+      this.update();
+    }
+    // вынесли код, который обновляет состояние в функцию
+    update() {
       this.props.getData()
         .then((data) => {
           this.setState({

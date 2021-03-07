@@ -23,11 +23,23 @@ import './app.css';
 
 export default class App extends Component {
 
-  swapiService = new DummySwapiService();
-
   state = {
     showRandomPlanet: true,
-    hasError: false
+    swapiService: new DummySwapiService()
+  };
+
+  onServiceChange = () => {
+    this.setState(({ swapiService }) => {
+      // наш новый сервис будет зависеть от того, какой тип у нашего текущего сервиса
+      const Service = swapiService instanceof SwapiService ?
+                        DummySwapiService : SwapiService;
+
+      console.log('switched to', Service.name);
+
+      return {
+        swapiService: new Service()
+      };
+    });
   };
 
   toggleRandomPlanet = () => {
@@ -46,9 +58,7 @@ export default class App extends Component {
     const { getPerson,
             getStarship,
             getPersonImage,
-            getStarshipImage,
-            getAllPeople,
-            getAllPlanets } = this.swapiService;
+            getStarshipImage } = this.state.swapiService;
 
     const personDetails = (
       <ItemDetails
@@ -76,9 +86,9 @@ export default class App extends Component {
 
     return (
       <ErrorBoundry>
-        <SwapiServiceProvider value={this.swapiService}>
+        <SwapiServiceProvider value={this.state.swapiService}>
           <div className="star-app">
-            <Header />
+            <Header onServiceChange={this.onServiceChange} />
 
             <PersonDetails itemId={11}/>
 
@@ -95,7 +105,6 @@ export default class App extends Component {
           </div>
         </SwapiServiceProvider>
       </ErrorBoundry>
-
     );
   };
 }
